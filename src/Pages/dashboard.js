@@ -9,7 +9,7 @@ function Dashboard() {
       <div className="main">
         <div className="subHeader" >
           <div className="left">
-            <h1>Take a deeper dive into a new way to work pranjal.</h1>
+            <h1>Take a deeper dive into a new way to work.</h1>
             <h3>Creating a collaborative sphere for effective workplace management.</h3>
           </div>
           <div className="right">
