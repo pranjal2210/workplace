@@ -1,0 +1,30 @@
+html{
+   scroll-behavior: smooth;
+}
+.footer{
+    background-color: #24305E;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px;
+}
+.footer .navLinks a{
+    color: #D1D7E0;
+    margin-left: 40px;
+    text-decoration: none;
+    font-size: 20px;
+ }
+ .footer .navLinks a:hover{
+  text-shadow: 0px 0px 20px #D1D7E0;
+ }
+ .head{
+    background-color: #D1D7E0;
+    margin: 0;
+    padding: 0;
+    height: 2px;
+ }
+ .foot{
+    background-color: #24305E;
+    color: #D1D7E0;
+ }
