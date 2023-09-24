@@ -1,12 +1,17 @@
 import React, { useState } from "react";
-import '../Styles/registerLogin.css';
+import '../styles/registerLogin.css';
 
-function RegisterLogin() {
+function RegisterLogin(props) {
     const [action, setAction] = useState("Login");
+
+    const handleClose = () => {
+        props.onClose();
+    }
 
     return (
         <div className="pop-up">
             <div className="wrapper">
+                <button className="closeBtn" onClick={handleClose}>&#10006;</button>
                 <div className="form-container">
                     <div className="slide-controls">
                         <input type="radio" name="slide" id="login" checked={action === 'Login'} onClick={() => { setAction("Login"); }} />

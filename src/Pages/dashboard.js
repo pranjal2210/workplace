@@ -1,7 +1,7 @@
 import React from "react";
-import '../Styles/dashboard.css';
-import Header from '../Components/Header';
-import Footer from "../Components/Footer";
+import '../styles/dashboard.css';
+import Header from '../Components/header';
+import Footer from "../Components/footer";
 
 function Dashboard() {
   return (

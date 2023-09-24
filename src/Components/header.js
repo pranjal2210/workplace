@@ -1,18 +1,26 @@
 import React, { useEffect } from "react";
-import '../Styles/header.css';
-import RegisterLogin from "./RegisterLogin";
+import '../styles/header.css';
+import RegisterLogin from "./registerLogin";
 import { useState } from "react";
 
 function Header() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const openPopup = () => {
+    setIsPopupOpen(true);
+  }
+
+  const closePopup = () => {
+    setIsPopupOpen(false);
+  }
 
   useEffect(() => {
-    if (isOpen) {
+    if (isPopupOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'auto';
     }
-  }, [isOpen]);
+  }, [isPopupOpen]);
 
   return (
     <div className="root" id="home">
@@ -28,15 +36,10 @@ function Header() {
         </div>
       </div>
       <div>
-        <button className="btn" onClick={() => setIsOpen(true)}>
+        <button className="btn" onClick={openPopup}>
           Signin
         </button>
-        {isOpen && (
-          <>
-            <RegisterLogin />
-            <button className="closeBtn" onClick={() => setIsOpen(false)}>&#10006;</button>
-          </>
-        )}
+        {isPopupOpen && <RegisterLogin onClose={closePopup} />}
       </div>
     </div>
   );
