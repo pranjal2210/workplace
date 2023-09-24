@@ -1,15 +1,24 @@
-import React from "react";
-import '../styles/header.css';
+import React, { useEffect } from "react";
+import '../Styles/header.css';
+import RegisterLogin from "./RegisterLogin";
 import { useState } from "react";
-import RegisterLogin from "../Pages/registerLogin";
-import '../styles/registerLogin.css';
+
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [isOpen]);
+
   return (
     <div className="root" id="home">
       <div className="subRoot">
         <div className="logotext">
-          <img src="/collabLogo.png" alt="logo" className="logoimg" />
+          <img src="/images/collabLogo.png" alt="logo" className="logoimg" />
           CollabSphere
         </div>
         <div className="navLinks">
@@ -23,10 +32,13 @@ function Header() {
           Signin
         </button>
         {isOpen && (
-          <RegisterLogin/>
+          <>
+            <RegisterLogin />
+            <button className="closeBtn" onClick={() => setIsOpen(false)}>&#10006;</button>
+          </>
         )}
       </div>
     </div>
-  )
+  );
 }
 export default Header;
