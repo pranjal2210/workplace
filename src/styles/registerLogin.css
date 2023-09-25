@@ -16,7 +16,7 @@
 .wrapper{
   overflow: hidden;
   width: 400px;
-  height: 450px;
+  height: max-content;
   background: #fff;
   display: flex;
   justify-content: center;

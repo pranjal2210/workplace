@@ -1,11 +1,21 @@
 import React, { useState } from "react";
 import '../styles/registerLogin.css';
+import {postData} from "../FetchNodeServices"
 
 function RegisterLogin(props) {
     const [action, setAction] = useState("Login");
+    const [eid, setEid] = useState('');
+    const [email, setEmail] = useState('');
+    const [name, setName] = useState('');
+    const [password, setPassword] = useState('');
 
     const handleClose = () => {
         props.onClose();
+    }
+    const handleSubmit = async () => {
+        var body = { eid: eid, email: email, name: name, password: password }
+        var result = await postData("users/insertuser", body)
+        console.log(result)
     }
 
     return (
@@ -22,7 +32,7 @@ function RegisterLogin(props) {
                     </div>
                     <div className="form-inner">
                         {action === "Login" ?
-                            <form action="#" className="login">
+                            <form className="login">
                                 <div className="field">
                                     <input type="text" placeholder="Email Address" required />
                                 </div>
@@ -34,22 +44,28 @@ function RegisterLogin(props) {
                                 </div>
                             </form>
                             :
-                            <form action="#" className="signup">
+                            <form className="signup">
                                 <div className="field">
-                                    <input type="text" placeholder="Email Address" required />
+                                    <input type="text" placeholder="Employee Id" required onChange={(event) => setEid(event.target.value)} />
                                 </div>
                                 <div className="field">
-                                    <input type="password" placeholder="Password" required />
+                                    <input type="text" placeholder="Full Name" required onChange={(event) => setName(event.target.value)} />
                                 </div>
                                 <div className="field" style={{ display: "none" }}>
                                     <input type="password" placeholder="Password" required />
                                 </div>
                                 <div className="field">
-                                    <input type="password" placeholder="Confirm Password" required />
+                                    <input type="email" placeholder="Email" required onChange={(event) => setEmail(event.target.value)} />
+                                </div>
+                                <div className="field">
+                                    <input type="password" placeholder="Password" required onChange={(event) => setPassword(event.target.value)} />
+                                </div>
+                                <div className="field">
+                                    <input type="password" placeholder="Confirm Password" />
                                 </div>
                                 <div className="field">
                                     <div className="btn-layer"></div>
-                                    <input type="submit" value="Signup" />
+                                    <input type="submit" value="Signup" onClick={handleSubmit} />
                                 </div>
                             </form>
                         }
