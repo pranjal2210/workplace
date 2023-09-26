@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import '../styles/registerLogin.css';
-import {postData} from "../FetchNodeServices"
+import { postData } from "../FetchNodeServices";
 
 function RegisterLogin(props) {
     const [action, setAction] = useState("Login");
@@ -8,15 +8,26 @@ function RegisterLogin(props) {
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
+    const [loginEmail, setLoginEmail] = useState('');
+    const [loginPassword, setLoginPassword] = useState('');
 
     const handleClose = () => {
         props.onClose();
-    }
-    const handleSubmit = async () => {
-        var body = { eid: eid, email: email, name: name, password: password }
-        var result = await postData("users/insertuser", body)
-        console.log(result)
-    }
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        var body = { eid: eid, email: email, name: name, password: password };
+        var result = await postData("users/insertuser", body);
+        console.log(result);
+    };
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        var body = { email: loginEmail, password: loginPassword };
+        var result = await postData("users/userlogin", body);
+        console.log(result);
+    };
 
     return (
         <div className="pop-up">
@@ -24,8 +35,8 @@ function RegisterLogin(props) {
                 <button className="closeBtn" onClick={handleClose}>&#10006;</button>
                 <div className="form-container">
                     <div className="slide-controls">
-                        <input type="radio" name="slide" id="login" checked={action === 'Login'} onClick={() => { setAction("Login"); }} />
-                        <input type="radio" name="slide" id="signup" checked={action === 'Signup'} onClick={() => { setAction("Signup"); }} />
+                        <input type="radio" name="slide" id="login" checked={action === 'Login'} onChange={() => { setAction("Login"); }} />
+                        <input type="radio" name="slide" id="signup" checked={action === 'Signup'} onChange={() => { setAction("Signup"); }} />
                         <label htmlFor="login" className="slide login" >Login</label>
                         <label htmlFor="signup" className="slide signup">Signup</label>
                         <div className="slider-tab"></div>
@@ -34,13 +45,13 @@ function RegisterLogin(props) {
                         {action === "Login" ?
                             <form className="login">
                                 <div className="field">
-                                    <input type="text" placeholder="Email Address" required />
+                                    <input type="text" placeholder="Email Address" onChange={(event) => setLoginEmail(event.target.value)} required />
                                 </div>
                                 <div className="field">
-                                    <input type="password" placeholder="Password" required />
+                                    <input type="password" placeholder="Password" onChange={(event) => setLoginPassword(event.target.value)} required />
                                 </div>
                                 <div className="field">
-                                    <input type="submit" value="Login" />
+                                    <input type="submit" value="Login" onClick={handleLogin} />
                                 </div>
                             </form>
                             :
