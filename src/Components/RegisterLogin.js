@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import '../styles/registerLogin.css';
 import { postData } from "../FetchNodeServices";
+import { useHistory } from "react-router-dom";
 
 function RegisterLogin(props) {
     const [action, setAction] = useState("Login");
@@ -11,6 +12,8 @@ function RegisterLogin(props) {
     const [loginEmail, setLoginEmail] = useState('');
     const [loginPassword, setLoginPassword] = useState('');
 
+    const history = useHistory();
+
     const handleClose = () => {
         props.onClose();
     };
@@ -19,14 +22,14 @@ function RegisterLogin(props) {
         e.preventDefault();
         var body = { eid: eid, email: email, name: name, password: password };
         var result = await postData("users/insertuser", body);
-        console.log(result);
+        alert(result.message);
     };
 
     const handleLogin = async (e) => {
         e.preventDefault();
         var body = { email: loginEmail, password: loginPassword };
         var result = await postData("users/userlogin", body);
-        console.log(result);
+        alert(result.message);
     };
 
     return (
@@ -45,7 +48,7 @@ function RegisterLogin(props) {
                         {action === "Login" ?
                             <form className="login">
                                 <div className="field">
-                                    <input type="text" placeholder="Email Address" onChange={(event) => setLoginEmail(event.target.value)} required />
+                                    <input type="email" placeholder="Email Address" onChange={(event) => setLoginEmail(event.target.value)} required />
                                 </div>
                                 <div className="field">
                                     <input type="password" placeholder="Password" onChange={(event) => setLoginPassword(event.target.value)} required />
