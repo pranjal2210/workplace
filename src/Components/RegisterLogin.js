@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import '../styles/registerLogin.css';
 import { postData } from "../FetchNodeServices";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 function RegisterLogin(props) {
     const [action, setAction] = useState("Login");
@@ -11,8 +11,8 @@ function RegisterLogin(props) {
     const [password, setPassword] = useState('');
     const [loginEmail, setLoginEmail] = useState('');
     const [loginPassword, setLoginPassword] = useState('');
+    const navigate = useNavigate();
 
-    const history = useHistory();
 
     const handleClose = () => {
         props.onClose();
@@ -30,6 +30,9 @@ function RegisterLogin(props) {
         var body = { email: loginEmail, password: loginPassword };
         var result = await postData("users/userlogin", body);
         alert(result.message);
+        if(result.message==="Login successful"){
+            navigate('/home');
+        }
     };
 
     return (

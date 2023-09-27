@@ -1,0 +1,64 @@
+.container{
+    background-color: #D1D7E0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+.sidebar{
+    background-color: #24305E;
+    width: 20%;
+    height: 100%;
+}
+.rigthbar{
+    background-color: #D1D7E0;
+    width: 80%;
+    height: 100%;
+}
+.logo img{
+    width: 40px;
+}
+.logo{
+    font-size: 30px;
+    color: #D1D7E0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:10px;
+    padding: 20px;
+    font-weight: 500;
+}
+.channels{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.channelDropdown{
+    display: flex;
+    gap:40px;
+    color: #D1D7E0;
+    font-size: 20px;
+    align-items: center;
+    width: 100%;
+}
+.channelDropdown h3{
+    letter-spacing: 2px;
+    font-size: 24px;
+}
+.channelDropdown i{
+    background-color: #D1D7E0;
+    color: #24305E;
+    padding: 4px 5px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.channelwrapper{
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    color: #D1D7E0;
+    padding: 20px;
+    gap: 10px;
+}
