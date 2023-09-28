@@ -1,52 +1,67 @@
-.container{
+::-webkit-scrollbar {
+    width: 0.3rem;
+    /* overflow: hidden; */
+}
+
+.container {
     background-color: #D1D7E0;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     display: flex;
 }
-.sidebar{
-    background-color: #24305E;
-    width: 20%;
-    height: 100%;
-}
-.rigthbar{
+
+.sidebar {
     background-color: #D1D7E0;
-    width: 80%;
+    width: 18rem;
     height: 100%;
 }
-.logo img{
+
+.sidebar .inner {
+    background-color: #24305E;
+    width: 18rem;
+    height: 100%;
+    border-bottom-right-radius: 50px;
+}
+
+.logo img {
     width: 40px;
 }
-.logo{
+
+.logo {
     font-size: 30px;
     color: #D1D7E0;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap:10px;
+    gap: 10px;
     padding: 20px;
     font-weight: 500;
 }
-.channels{
+
+.channels {
     padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-.channelDropdown{
+
+.channelDropdown {
     display: flex;
-    gap:40px;
+    gap: 40px;
     color: #D1D7E0;
     font-size: 20px;
     align-items: center;
     width: 100%;
 }
-.channelDropdown h3{
-    letter-spacing: 2px;
+
+.channelDropdown h3 {
+    /* letter-spacing: 2px; */
     font-size: 24px;
+    font-weight: 500;
 }
-.channelDropdown i{
+
+.channelDropdown i {
     background-color: #D1D7E0;
     color: #24305E;
     padding: 4px 5px;
@@ -54,11 +69,182 @@
     font-size: 14px;
     cursor: pointer;
 }
-.channelwrapper{
+
+.channelwrapper {
     display: flex;
     flex-direction: column;
-    font-size: 20px;
     color: #D1D7E0;
     padding: 20px;
+    gap: 20px;
+}
+
+.channelwrapper h4 {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.addChannel {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     gap: 10px;
+}
+
+.addChannel i {
+    background-color: #D1D7E0;
+    color: #24305E;
+    padding: 4px 5px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+
+
+
+
+.rightbar {
+    background-color: #24305E;
+    height: 100%;
+    position: relative;
+    width: calc(100vw - 18rem);
+}
+
+.rightbar .inner {
+    background-color: #D1D7E0;
+    height: 100%;
+    position: relative;
+    padding: 20px;
+    width: calc(100vw - 18rem);
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+
+.userBar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    gap: 10px;
+    font-size: 20px;
+}
+
+.userBar img {
+    border-radius: 50%;
+    width: 50px;
+}
+
+.channelTitle {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 100px;
+    padding: 10px;
+    background: #D1D7E0;
+}
+
+.messageContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: calc(100% - 60px);
+    background: #bcc7d7;
+    margin-top: 10px;
+    padding: 16px;
+    border-radius: 40px;
+    gap: 10px;
+    overflow: hidden;
+}
+
+.chatBox {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /* background: red; */
+    border-radius: 24px;
+    overflow: auto;
+    gap: 20px;
+}
+
+.messageDiv {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+    height: 50px;
+    gap: 10px;
+}
+
+.msgImg{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.msgImg img {
+    width: 50px;
+    border-radius: 50%;
+}
+
+.message {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    justify-content: center;
+}
+
+.message .msgText {
+    font-size: 20px;
+}
+
+.message .nameAndTime {
+    font-size: 12px;
+}
+
+.textBox {
+    display: flex;
+    height: 70px;
+    border-radius: 30px;
+    width: 98%;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.textBox input {
+    width: 100%;
+    height: 100%;
+    padding: 4px 10px;
+    border-radius: 40px;
+}
+
+
+.textBox i {
+    background-color: #24305E;
+    padding: 12px 24px;
+    color: #D1D7E0;
+    border-radius: 40px;
+    cursor: pointer;
+}
+
+
+
+::-webkit-scrollbar {
+    width: .3rem;
+}
+
+::-webkit-scrollbar-track {
+    background: #bcc7d7;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #8e9fb8;
+    border-radius: 2rem;
 }
