@@ -1,27 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/homepage.css";
-import { postData } from "../FetchNodeServices";
+import ChatBox from "../Components/chatBox";
+import { postData,getData } from "../FetchNodeServices";
 
 function HomePage() {
   const [open, isOpen] = useState(false);
+  const [channel,setChannel]=useState([]);
+  const [channelName,setChannelName]=useState("General");
 
 
 
   function handleDropdown() {
     isOpen(!open);
   }
+ 
+  const fetchChannels=async(e)=>{
+    var result=await getData("users/displayChannels")
+   setChannel(result.data)
+  }
 
-  const addChannel = async (e) => {
-    e.preventDefault();
-    const channelName = prompt("Enter channel name: ");
+  function handleChannelName(data){
+    setChannelName(data)
+  }
 
-    var body = { channelName: channelName };
-    var result = await postData("users/addchannel", body);
-    
-    alert(result.message);
-  };
-
-
+  useEffect(function(){
+    fetchChannels()
+   },[])
 
   return (
     <>
@@ -40,16 +44,11 @@ function HomePage() {
               </div>
               {!open ?
                 <div className="channelwrapper">
-                  <div>
-                    <h4>#general</h4>
-                  </div>
-                  <div>
-                    <h4>#teams</h4>
-                  </div>
-                  <div className="addChannel" onClick={addChannel}>
-                    <h4>Add channel</h4>
-                    <i className="fa-solid fa-plus"></i>
-                  </div>
+                  {channel.map((data)=>(
+                    <div onClick={()=>handleChannelName(data.channelName)}>
+                      <h4>#{data.channelName}</h4>
+                    </div>
+                  ))}
                 </div>
                 : <></>}
             </div>
@@ -58,118 +57,7 @@ function HomePage() {
         </div>
         <div className="rightbar">
           <div className="inner">
-            <div className="userBar">
-              Pranjal
-              <img src="/images/user.png" alt="user" />
-            </div>
-            <div className="channelTitle">#GENERAL</div>
-            <div className="messageContainer">
-              <div className="chatBox">
-                <div className="messageDiv">
-                  <div className="msgImg">
-                    <img src="/images/user.png" alt="chatimg" />
-                  </div>
-                  <div className="message">
-                    <p className="msgText">Hello Everyone</p>
-                    <p className="nameAndTime">Pranjal <span>8:30am</span> </p>
-                  </div>
-                </div>
-                <div className="messageDiv">
-                  <div className="msgImg">
-                    <img src="/images/user.png" alt="chatimg" />
-                  </div>
-                  <div className="message">
-                    <p className="msgText">Hello Everyone</p>
-                    <p className="nameAndTime">Pranjal <span>8:30am</span> </p>
-                  </div>
-                </div>
-                <div className="messageDiv">
-                  <div className="msgImg">
-                    <img src="/images/user.png" alt="chatimg" />
-                  </div>
-                  <div className="message">
-                    <p className="msgText">Hello Everyone</p>
-                    <p className="nameAndTime">Pranjal <span>8:30am</span> </p>
-                  </div>
-                </div>
-                <div className="messageDiv">
-                  <div className="msgImg">
-                    <img src="/images/user.png" alt="chatimg" />
-                  </div>
-                  <div className="message">
-                    <p className="msgText">Hello Everyone</p>
-                    <p className="nameAndTime">Pranjal <span>8:30am</span> </p>
-                  </div>
-                </div>
-                <div className="messageDiv">
-                  <div className="msgImg">
-                    <img src="/images/user.png" alt="chatimg" />
-                  </div>
-                  <div className="message">
-                    <p className="msgText">Hello Everyone</p>
-                    <p className="nameAndTime">Pranjal <span>8:30am</span> </p>
-                  </div>
-                </div>
-                <div className="messageDiv">
-                  <div className="msgImg">
-                    <img src="/images/user.png" alt="chatimg" />
-                  </div>
-                  <div className="message">
-                    <p className="msgText">Hello Everyone</p>
-                    <p className="nameAndTime">Pranjal <span>8:30am</span> </p>
-                  </div>
-                </div>
-                <div className="messageDiv">
-                  <div className="msgImg">
-                    <img src="/images/user.png" alt="chatimg" />
-                  </div>
-                  <div className="message">
-                    <p className="msgText">Hello Everyone</p>
-                    <p className="nameAndTime">Pranjal <span>8:30am</span> </p>
-                  </div>
-                </div>
-                <div className="messageDiv">
-                  <div className="msgImg">
-                    <img src="/images/user.png" alt="chatimg" />
-                  </div>
-                  <div className="message">
-                    <p className="msgText">Hello Everyone</p>
-                    <p className="nameAndTime">Pranjal <span>8:30am</span> </p>
-                  </div>
-                </div>
-                <div className="messageDiv">
-                  <div className="msgImg">
-                    <img src="/images/user.png" alt="chatimg" />
-                  </div>
-                  <div className="message">
-                    <p className="msgText">Hello Everyone</p>
-                    <p className="nameAndTime">Pranjal <span>8:30am</span> </p>
-                  </div>
-                </div>
-                <div className="messageDiv">
-                  <div className="msgImg">
-                    <img src="/images/user.png" alt="chatimg" />
-                  </div>
-                  <div className="message">
-                    <p className="msgText">Hello Everyone</p>
-                    <p className="nameAndTime">Pranjal <span>8:30am</span> </p>
-                  </div>
-                </div>
-                <div className="messageDiv">
-                  <div className="msgImg">
-                    <img src="/images/user.png" alt="chatimg" />
-                  </div>
-                  <div className="message">
-                    <p className="msgText">Hello Everyone</p>
-                    <p className="nameAndTime">Pranjal <span>8:30am</span> </p>
-                  </div>
-                </div>
-              </div>
-              <div className="textBox">
-                <input type="text" placeholder="Message" />
-                <i class="fa-solid fa-paper-plane"></i>
-              </div>
-            </div>
+          <ChatBox channelName={channelName}/>
           </div>
         </div>
       </div>
