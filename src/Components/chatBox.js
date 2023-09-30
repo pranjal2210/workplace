@@ -10,16 +10,26 @@ function chatBox(props) {
                 <img src="/images/user.png" alt="user" />
             </div>
             <div className="channelTitle">#{props.channelName}</div>
+
             <div className="messageContainer">
-                <div className="chatBox">
-                    <MessageSelf/>
-                </div>
-                <div className="textBox">
-                    <input type="text" placeholder="Message" />
-                    <i class="fa-solid fa-paper-plane"></i>
-                </div>
+                {props.channelName !== "" ?
+                    <>
+                        <div className="chatBox">
+                            <MessageSelf />
+                        </div>
+                        <div className="textBox">
+                            <input type="text" placeholder="Message" />
+                            <i className="fa-solid fa-paper-plane"></i>
+                        </div>
+                    </>
+                    :
+                    <div className="chatLogo">
+                        <img src="/images/collabLogo.png" alt="chatLogo"/>
+                        CollabSphere
+                    </div>
+                }
             </div>
         </>
-    )
+    );
 }
 export default chatBox;

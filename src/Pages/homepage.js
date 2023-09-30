@@ -6,7 +6,7 @@ import { postData,getData } from "../FetchNodeServices";
 function HomePage() {
   const [open, isOpen] = useState(false);
   const [channel,setChannel]=useState([]);
-  const [channelName,setChannelName]=useState("General");
+  const [channelName,setChannelName]=useState("");
 
 
 
@@ -45,7 +45,7 @@ function HomePage() {
               {!open ?
                 <div className="channelwrapper">
                   {channel.map((data)=>(
-                    <div onClick={()=>handleChannelName(data.channelName)}>
+                    <div onClick={()=>handleChannelName(data.channelName)} key={data._id}>
                       <h4>#{data.channelName}</h4>
                     </div>
                   ))}
@@ -57,7 +57,7 @@ function HomePage() {
         </div>
         <div className="rightbar">
           <div className="inner">
-          <ChatBox channelName={channelName}/>
+          <ChatBox channelName={channelName} />
           </div>
         </div>
       </div>

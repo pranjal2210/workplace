@@ -38,3 +38,8 @@ code {
   background: linear-gradient(#24305E, #D1D7E0, #24305E);
   border-radius: 2rem;
 }
+
+img {
+  -webkit-user-drag: none;
+  user-select: none;
+}
