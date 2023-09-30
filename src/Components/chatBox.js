@@ -1,6 +1,7 @@
 import React from "react";
 import '../styles/homepage.css';
 import MessageSelf from "./messageSelf";
+import MessageOthers from "./messageOthers";
 
 function chatBox(props) {
     return (
@@ -15,7 +16,8 @@ function chatBox(props) {
                 {props.channelName !== "" ?
                     <>
                         <div className="chatBox">
-                            <MessageSelf />
+                            <MessageOthers />
+                            <MessageSelf/>
                         </div>
                         <div className="textBox">
                             <input type="text" placeholder="Message" />

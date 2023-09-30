@@ -15,7 +15,7 @@ function HomePage() {
   }
  
   const fetchChannels=async(e)=>{
-    var result=await getData("users/displayChannels")
+    var result=await getData("channel/displayChannels")
    setChannel(result.data)
   }
 
