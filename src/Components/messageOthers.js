@@ -5,8 +5,8 @@ function messageOthers() {
     return (
         <>
             <div className="messageDiv">
-                <div className="msgImg">
-                <img src="/images/user.png" alt="chating" />
+                <div className="msgAvatarOthers">
+                    <h1>P</h1>
                 </div>
                 <div className="msgWrapper msgother">
                     <p className="sender">Pranjal</p>

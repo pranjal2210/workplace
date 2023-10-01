@@ -102,6 +102,55 @@
     font-size: 14px;
 }
 
+.allUsers {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.usersDropdown {
+    display: flex;
+    gap: 40px;
+    color: #D1D7E0;
+    font-size: 20px;
+    align-items: center;
+    width: 100%;
+}
+
+.usersDropdown h3 {
+    /* letter-spacing: 2px; */
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.usersDropdown i {
+    background-color: #D1D7E0;
+    color: #24305E;
+    padding: 4px 5px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.usersWrapper {
+    display: flex;
+    flex-direction: column;
+    color: #D1D7E0;
+    padding: 20px;
+    gap: 20px;
+}
+.usersWrapper div{
+    cursor: pointer;
+}
+
+.usersWrapper h4 {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+
 
 
 
@@ -169,10 +218,10 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    /* background: red; */
+    height: calc(100% - 70px);
     border-radius: 24px;
     overflow: auto;
-    gap: 20px;
+    gap: 0;
 }
 
 .textBox {

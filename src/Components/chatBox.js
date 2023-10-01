@@ -18,6 +18,13 @@ function chatBox(props) {
                         <div className="chatBox">
                             <MessageOthers />
                             <MessageSelf/>
+                            <MessageOthers />
+                            <MessageSelf/>
+                            <MessageOthers />
+                            <MessageSelf/>
+                            <MessageOthers />
+                            <MessageSelf/>
+                            <MessageSelf/>
                         </div>
                         <div className="textBox">
                             <input type="text" placeholder="Message" />

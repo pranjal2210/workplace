@@ -12,8 +12,8 @@ function messageSelf() {
                     </div>
                     <p className="msgTime">8:30 am</p>
                 </div>
-                <div className="msgImg">
-                    <img src="/images/user.png" alt="chating" />
+                <div className="msgAvatarSelf">
+                    <h1>P</h1>
                 </div>
             </div>
 
