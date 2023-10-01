@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import '../styles/homepage.css';
 import MessageSelf from "./messageSelf";
 import MessageOthers from "./messageOthers";
 
-function chatBox(props) {
+function ChatBox(props) {
+    const [name,setName]=useState("");
+    const userData=JSON.parse(localStorage.getItem("userData"));
+    const getName=()=>{
+        setName(userData.name);
+    }
+    useEffect(function () {
+        getName();
+      }, []);
     return (
         <>
             <div className="userBar">
-                Pranjal
+                {name}
                 <img src="/images/user.png" alt="user" />
             </div>
             <div className="channelTitle">#{props.channelName}</div>
@@ -41,4 +49,4 @@ function chatBox(props) {
         </>
     );
 }
-export default chatBox;
+export default ChatBox;

@@ -21,20 +21,6 @@
     color: #24305E;
 }
 
-.msgAvatarSelf{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #24305E;
-    padding: 8px 16px;
-    border-radius: 50%;
-    font-family: monospace;
-}
-
-.msgAvatarSelf h1{
-    color: #D1D7E0;
-}
-
 .msgWrapper{
     display: flex;
     flex-direction: column;

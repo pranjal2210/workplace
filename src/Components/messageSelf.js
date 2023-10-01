@@ -12,9 +12,6 @@ function messageSelf() {
                     </div>
                     <p className="msgTime">8:30 am</p>
                 </div>
-                <div className="msgAvatarSelf">
-                    <h1>P</h1>
-                </div>
             </div>
 
         </>

@@ -258,16 +258,7 @@
 
 
 ::-webkit-scrollbar {
-    width: .3rem;
-}
-
-::-webkit-scrollbar-track {
-    background: #bcc7d7;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #8e9fb8;
-    border-radius: 2rem;
+    width: 0rem;
 }
 
 .chatLogo{

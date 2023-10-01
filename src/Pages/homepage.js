@@ -9,15 +9,14 @@ function HomePage() {
   const [openUser, isOpenUser] = useState(false);
   const [channel, setChannel] = useState([]);
   const [channelName, setChannelName] = useState("");
-  const [users, setUsers] = useState("");
+  const [users, setUsers] = useState([]);
 
   const userData = JSON.parse(localStorage.getItem("userData"));
   const nav = useNavigate();
   if (!userData) {
     alert("Please log in first")
-    nav("/");
+    nav(-1);
   }
-
 
 
   function handleDropdown() {
@@ -34,9 +33,15 @@ function HomePage() {
   };
 
   const fetchUsers = async (e) => {
-    var result = await getData("channel/displayUsers");
+    console.log("Users refreshed");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userData.token}`,
+      },
+    };
+    var result = await getData("channel/displayUsers",config);
     setUsers(result.data);
-    console.log(result.data);
+    console.log("RESULT:",result.data)
   };
 
   function handleChannelName(data) {
@@ -86,9 +91,9 @@ function HomePage() {
               {!openUser ?
                 <div className="usersWrapper">
                   {users.map((data) => (
-                    // <div onClick={() => handleUsers(data.name)} key={data._id}>
+                    <div onClick={() => handleUsers(data.name)} key={data._id}>
                       <h4>{data.name}</h4>
-                    // </div>
+                    </div>
                   ))}
                 </div>
                 : <></>}

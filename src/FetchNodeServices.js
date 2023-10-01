@@ -1,10 +1,11 @@
 var ServerURL="http://localhost:5000/"
 var axios=require("axios")
 //purpose is to read all data
-const getData=async(url)=>{
+const getData=async(url,config)=>{
 try{
- var response=await fetch(`${ServerURL}${url}`)
+ var response=await fetch(`${ServerURL}${url}`,config)
  var result=await response.json({})
+ console.log(config)
  return result;
 }
 catch(e)
