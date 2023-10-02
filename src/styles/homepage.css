@@ -178,9 +178,8 @@
     align-items: center;
     justify-content: center;
     position: absolute;
-    top: 20px;
+    top: 14px;
     right: 20px;
-    cursor: pointer;
     gap: 10px;
     font-size: 20px;
 }

@@ -1,7 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import '../styles/registerLogin.css';
 import { postData } from "../FetchNodeServices";
 import { useNavigate } from 'react-router-dom';
+import Alert from '@mui/material/Alert';
+import IconButton from '@mui/material/IconButton';
+import Collapse from '@mui/material/Collapse';
+import CloseIcon from '@mui/icons-material/Close';
 
 function RegisterLogin(props) {
     const [eid, setEid] = useState('');
@@ -10,6 +14,10 @@ function RegisterLogin(props) {
     const [password, setPassword] = useState('');
     const [loginEmail, setLoginEmail] = useState('');
     const [loginPassword, setLoginPassword] = useState('');
+    const [openAlert, setOpenAlert] = React.useState(false);
+    const [alertMsg, setAlertMsg] = React.useState("");
+    const [alertType, setAlertType] = React.useState("success");
+
     const navigate = useNavigate();
 
 
@@ -22,7 +30,9 @@ function RegisterLogin(props) {
         try {
             var body = { eid: eid, email: email, name: name, password: password };
             var result = await postData("users/insertuser", body);
-            alert(result.message);
+            setAlertMsg(result.message);
+            setAlertType(result.msgType);
+            setOpenAlert(true);
         } catch (error) {
             console.log(error);
         }
@@ -33,10 +43,19 @@ function RegisterLogin(props) {
         try {
             var body = { email: loginEmail, password: loginPassword };
             var result = await postData("users/userlogin", body);
-            alert(result.message);
+            setAlertMsg(result.message);
+            setAlertType(result.msgType);
+            setOpenAlert(true);
             if (result.message === "Login successful") {
-                navigate('/home');
-                localStorage.setItem("userData", JSON.stringify(result));
+                const timer = setTimeout(() => {
+                    setOpenAlert(false);
+                    navigate('/home');
+                    localStorage.setItem("userData", JSON.stringify(result));
+                }, 1000);
+
+                return () => {
+                    clearTimeout(timer); // Clear the timer if the component unmounts before the timeout
+                };
             }
         } catch (error) {
             console.log(error);
@@ -87,15 +106,46 @@ function RegisterLogin(props) {
         }
     };
 
+    useEffect(() => {
+        if (openAlert) {
+            const timer = setTimeout(() => {
+                setOpenAlert(false);
+            }, 4000);
+
+            return () => {
+                clearTimeout(timer); // Clear the timer if the component unmounts before the timeout
+            };
+        }
+    }, [openAlert]); // Run the effect whenever openAlert changes
+
 
     return (
         <div className="pop-up">
+            <Collapse in={openAlert} sx={{ position: "absolute", top: "20px", right: "40px", height: "80px" }}>
+                <Alert severity={alertType}
+                    action={
+                        <IconButton
+                            aria-label="close"
+                            color="inherit"
+                            size="small"
+                            onClick={() => {
+                                setOpenAlert(false);
+                            }}
+                        >
+                            <CloseIcon fontSize="inherit" />
+                        </IconButton>
+                    }
+                    sx={{ mb: 2, fontSize: "16px" }}
+                >
+                    {alertMsg}
+                </Alert>
+            </Collapse>
             <div className="wrapper" ref={wrapperRef}>
                 <button className="closeBtn" onClick={handleClose}>&#10006;</button>
 
                 <div className="slide-controls">
-                    <button type="button" className="loginBtn slide" onClick={loginFormBtnHandler} ref={loginBtnRef} >Sign in</button>
-                    <button type="button" className="registerBtn slide" onClick={registerFormBtnHandler} ref={regBtnRef} >Sign up</button>
+                    <button type="button" className="slide" onClick={loginFormBtnHandler} ref={loginBtnRef} >Sign in</button>
+                    <button type="button" className="slide registerBtn" style={{ color: "#000" }} onClick={registerFormBtnHandler} ref={regBtnRef} >Sign up</button>
 
                     <div id="btn" ref={btnRef}></div>
                 </div>

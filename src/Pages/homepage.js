@@ -8,21 +8,16 @@ function HomePage() {
   const [open, isOpen] = useState(false);
   const [openUser, isOpenUser] = useState(false);
   const [channel, setChannel] = useState([]);
-  const [channelName, setChannelName] = useState("");
+  const [channelName, setChannelName] = useState("welcome");
   const [users, setUsers] = useState([]);
 
   const userData = JSON.parse(localStorage.getItem("userData"));
   const nav = useNavigate();
-  if (!userData) {
-    alert("Please log in first")
-    nav(-1);
-  }
-
 
   function handleDropdown() {
     isOpen(!open);
   }
-  
+
   function handleUserDropdown() {
     isOpenUser(!openUser);
   }
@@ -39,9 +34,9 @@ function HomePage() {
         Authorization: `Bearer ${userData.token}`,
       },
     };
-    var result = await getData("channel/displayUsers",config);
+    var result = await getData("channel/displayUsers", config);
     setUsers(result.data);
-    console.log("RESULT:",result.data)
+    console.log("RESULT:", result.data);
   };
 
   function handleChannelName(data) {
@@ -53,6 +48,11 @@ function HomePage() {
   }
 
   useEffect(function () {
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    if (!userData) {
+      nav(-1);
+    }
+
     fetchChannels();
     fetchUsers();
   }, []);
@@ -91,7 +91,7 @@ function HomePage() {
               {!openUser ?
                 <div className="usersWrapper">
                   {users.map((data) => (
-                    <div onClick={() => handleUsers(data.name)} key={data._id}>
+                    <div key={data._id}>
                       <h4>{data.name}</h4>
                     </div>
                   ))}

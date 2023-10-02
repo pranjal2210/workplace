@@ -1,13 +1,12 @@
 import React from "react";
 import '../styles/message.css';
+import { Avatar } from "@mui/material";
 
 function messageOthers() {
     return (
         <>
             <div className="messageDiv">
-                <div className="msgAvatarOthers">
-                    <h1>P</h1>
-                </div>
+                <Avatar sx={{ bgcolor: '#24305E', width: 40, height: 40 }}>PS</Avatar>
                 <div className="msgWrapper msgother">
                     <p className="sender">Pranjal</p>
                     <div className="message">
@@ -18,6 +17,6 @@ function messageOthers() {
             </div>
 
         </>
-    )
+    );
 }
 export default messageOthers;

@@ -1,24 +1,9 @@
-
 .messageDiv {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: left;
     gap: 10px;
-}
-
-.msgAvatarOthers{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #fff;
-    padding: 8px 16px;
-    border-radius: 50%;
-    font-family: monospace;
-}
-
-.msgAvatarOthers h1{
-    color: #24305E;
 }
 
 .msgWrapper{
@@ -63,4 +48,8 @@
 }
 .sender,.msgTime{
     color: #24305E;
+}
+
+.messageDiv:last-child{
+    margin-bottom : 20px;
 }
