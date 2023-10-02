@@ -38,6 +38,16 @@ function HomePage() {
     setUsers(result.data);
     console.log("RESULT:", result.data);
   };
+  const fetchChats = async (data) => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userData.token}`,
+      },
+    };
+    var result = await postData("chat/accessChat",{userId:data}, config);
+    console.log(data);
+    
+  };
 
   function handleChannelName(data) {
     setChannelName(data);
@@ -91,7 +101,7 @@ function HomePage() {
               {!openUser ?
                 <div className="usersWrapper">
                   {users.map((data) => (
-                    <div key={data._id}>
+                    <div key={data._id} onClick={fetchChats(data._id)}>
                       <h4>{data.name}</h4>
                     </div>
                   ))}
