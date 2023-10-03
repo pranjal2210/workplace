@@ -48,8 +48,6 @@ function HomePage() {
     // console.log("RESULT:", result.data);
   };
 
-
-
   function handleChannelName(data) {
     setChannelName(data);
   }
@@ -128,7 +126,7 @@ function HomePage() {
               {!openUser ?
                 <div className="usersWrapper">
                   {users.map((data) => (
-                    <div key={data._id} >
+                    <div key={data._id}>
                       <h4>{data.name}</h4>
                     </div>
                   ))}
