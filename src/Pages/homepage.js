@@ -30,7 +30,12 @@ function HomePage() {
   }
 
   const fetchChannels = async (e) => {
-    var result = await getData("channel/displayChannels");
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userData.token}`,
+      },
+    };
+    var result = await getData("channel/displayChannels", config);
     setChannel(result.data);
   };
 

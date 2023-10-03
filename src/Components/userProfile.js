@@ -21,9 +21,14 @@ function UserProfile(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userData.token}`,
+      },
+    };
     try {
       var body = { eid: showEid, name: showName, email: showEmail, password: password };
-      var result = await postData("users/updateuser", body);
+      var result = await postData("users/updateuser", body, config);
       localStorage.setItem("userData", JSON.stringify(result));
       setOpenAlert(true);
       setAlertMsg(result.message);
