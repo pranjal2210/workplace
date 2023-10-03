@@ -5,7 +5,7 @@ const getData=async(url,config)=>{
 try{
  var response=await fetch(`${ServerURL}${url}`,config)
  var result=await response.json({})
- console.log(config)
+//  console.log(config)
  return result;
 }
 catch(e)

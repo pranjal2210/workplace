@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import "../styles/homepage.css";
-import ChatBox from "../Components/chatBox";
+import ChatBox from "../components/chatBox";
+import Conversation from "../components/conversation";
 import { postData, getData } from "../FetchNodeServices";
 import { useNavigate } from 'react-router-dom';
 
 function HomePage() {
   const [open, isOpen] = useState(false);
   const [openUser, isOpenUser] = useState(false);
+  const [openConvo, isOpenConvo] = useState(false);
   const [channel, setChannel] = useState([]);
   const [channelName, setChannelName] = useState("welcome");
+  const [chats, setChats] = useState([]);
   const [users, setUsers] = useState([]);
 
   const userData = JSON.parse(localStorage.getItem("userData"));
@@ -20,6 +23,10 @@ function HomePage() {
 
   function handleUserDropdown() {
     isOpenUser(!openUser);
+  }
+
+  function handleConvoDropdown() {
+    isOpenConvo(!openConvo);
   }
 
   const fetchChannels = async (e) => {
@@ -34,17 +41,17 @@ function HomePage() {
         Authorization: `Bearer ${userData.token}`,
       },
     };
-    var result = await getData("channel/displayUsers", config);
+
+    const currentUserId = userData.eid;
+    var result = await getData(`channel/displayUsers/${currentUserId}`, config);
     setUsers(result.data);
-    console.log("RESULT:", result.data);
+    // console.log("RESULT:", result.data);
   };
+
+
 
   function handleChannelName(data) {
     setChannelName(data);
-  }
-
-  function handleUsers(data) {
-    setUsers(data);
   }
 
   useEffect(function () {
@@ -55,6 +62,23 @@ function HomePage() {
 
     fetchChannels();
     fetchUsers();
+
+    const getChats = async () => {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${userData.token}`,
+        },
+      };
+
+      try {
+        const result = await getData(`chat/userChat/${userData._id}`, config);
+        // console.log('chats:', result);
+        setChats(result);
+      } catch (error) {
+        console.log("error in getChats", error);
+      }
+    };
+    getChats();
   }, []);
 
   return (
@@ -66,7 +90,6 @@ function HomePage() {
               <img src="/images/collabLogo.png" alt="sidebar" />
               CollabSphere
             </div>
-            <hr className="head" />
             <div className="channels">
               <div className="channelDropdown">
                 <i className={`${!open ? 'fa-solid fa-minus' : 'fa-solid fa-plus'}`} onClick={handleDropdown}></i>
@@ -83,6 +106,20 @@ function HomePage() {
                 : <></>}
             </div>
 
+            <div className="conversations">
+              <div className="convoDropdown">
+                <i className={`${!openConvo ? 'fa-solid fa-minus' : 'fa-solid fa-plus'}`} onClick={handleConvoDropdown}></i>
+                <h3>Conversations</h3>
+              </div>
+              {!openConvo ?
+                <div className="convoWrapper">
+                  {chats.map((chat) => (
+                    <Conversation key={chat._id} chatData={chat} />
+                  ))}
+                </div>
+                : <></>}
+            </div>
+
             <div className="allUsers">
               <div className="usersDropdown">
                 <i className={`${!openUser ? 'fa-solid fa-minus' : 'fa-solid fa-plus'}`} onClick={handleUserDropdown}></i>
@@ -91,7 +128,7 @@ function HomePage() {
               {!openUser ?
                 <div className="usersWrapper">
                   {users.map((data) => (
-                    <div key={data._id}>
+                    <div key={data._id} >
                       <h4>{data.name}</h4>
                     </div>
                   ))}
@@ -103,7 +140,7 @@ function HomePage() {
         </div>
         <div className="rightbar">
           <div className="inner">
-            <ChatBox channelName={channelName} />
+            <ChatBox key={userData._id} channelName={channelName} />
           </div>
         </div>
       </div>
