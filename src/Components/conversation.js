@@ -19,7 +19,7 @@ function Conversation(props) {
     try {
       const result = await getData(`channel/displayAUser/${otherUserID}`, config);
       // console.log("getUserData...", result.data.name);
-      setUsersData(result.data.name);
+      setUsersData(result.data);
     } catch (error) {
       console.log('error in getUserData', error);
     }
@@ -31,7 +31,7 @@ function Conversation(props) {
 
   return (
     <div key={props.chatData._id}>
-      <h4>{usersData}</h4>
+      <h4>{usersData.name}</h4>
     </div>
   );
 }

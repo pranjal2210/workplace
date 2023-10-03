@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../styles/homepage.css";
 import ChatBox from "../components/chatBox";
 import Conversation from "../components/conversation";
 import { postData, getData } from "../FetchNodeServices";
 import { useNavigate } from 'react-router-dom';
+import io from 'socket.io-client';
 
 function HomePage() {
   const [open, isOpen] = useState(false);
@@ -13,8 +14,19 @@ function HomePage() {
   const [channelName, setChannelName] = useState("welcome");
   const [chats, setChats] = useState([]);
   const [users, setUsers] = useState([]);
-
+  const [currentChat,setCurrentChat]=useState(null);
+  const [onlineUsers,setOnlineUsers]=useState([])
+  const socket=useRef()
   const userData = JSON.parse(localStorage.getItem("userData"));
+
+  useEffect(()=>{
+    socket.current=io('http://localhost:8800');
+    socket.current.emit("new-user-add",userData._id);
+    socket.current.on('get-users',(users)=>{
+      setOnlineUsers(users);
+    })
+  },[])
+
   const nav = useNavigate();
 
   function handleDropdown() {
@@ -117,7 +129,9 @@ function HomePage() {
               {!openConvo ?
                 <div className="convoWrapper">
                   {chats.map((chat) => (
+                    <div onClick={()=>setCurrentChat(chat)}>
                     <Conversation key={chat._id} chatData={chat} />
+                    </div>
                   ))}
                 </div>
                 : <></>}
@@ -143,7 +157,7 @@ function HomePage() {
         </div>
         <div className="rightbar">
           <div className="inner">
-            <ChatBox key={userData._id} channelName={channelName} />
+            <ChatBox currentUser={userData._id} channelName={channelName} chat={currentChat} />
           </div>
         </div>
       </div>

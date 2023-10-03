@@ -325,11 +325,12 @@
     justify-content: center;
     margin: auto;
     font-size: 60px;
-    color: #D1D7E0;
+    color: #bcc1ca;
     gap: 10px;
     font-weight: 600;
 }
 
 .chatLogo img {
-    width: 50%;
+    width: 500px;
+    filter: brightness(0.9);
 }
