@@ -16,6 +16,7 @@ function HomePage() {
   const [users, setUsers] = useState([]);
   const [currentChat,setCurrentChat]=useState(null);
   const [onlineUsers,setOnlineUsers]=useState([])
+  const [createChat,setCreateChat]=useState([])
   const socket=useRef()
   const userData = JSON.parse(localStorage.getItem("userData"));
 
@@ -25,7 +26,7 @@ function HomePage() {
     socket.current.on('get-users',(users)=>{
       setOnlineUsers(users);
     })
-  },[])
+  },[users])
 
   const nav = useNavigate();
 
@@ -68,7 +69,19 @@ function HomePage() {
   function handleChannelName(data) {
     setChannelName(data);
   }
-
+   const handleCreateChat=async(data)=>{
+    try{
+      var body={
+          senderID:userData._id,
+          receiverID:data._id
+      }
+      const result = await postData('chat/createChat',body);
+      console.log(result)
+  }
+  catch(error){
+      console.log(error);
+  }
+   }
   useEffect(function () {
     const userData = JSON.parse(localStorage.getItem("userData"));
     if (!userData) {
@@ -136,7 +149,9 @@ function HomePage() {
                 </div>
                 : <></>}
             </div>
-
+            <div onClick={showTimesheet}>
+              <h4>Timesheet</h4>
+            </div>
             <div className="allUsers">
               <div className="usersDropdown">
                 <i className={`${!openUser ? 'fa-solid fa-minus' : 'fa-solid fa-plus'}`} onClick={handleUserDropdown}></i>
@@ -145,7 +160,7 @@ function HomePage() {
               {!openUser ?
                 <div className="usersWrapper">
                   {users.map((data) => (
-                    <div key={data._id}>
+                    <div key={data._id} onClick={()=>handleCreateChat(data)}>
                       <h4>{data.name}</h4>
                     </div>
                   ))}

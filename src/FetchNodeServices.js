@@ -15,7 +15,7 @@ catch(e)
 }
 }
 //used when queries contain parameters
-const postData=async(url,body,config)=>{
+const postData=async(url,body)=>{
     try{
         console.log(url);
         console.log(body);
@@ -24,7 +24,7 @@ const postData=async(url,body,config)=>{
             mode:"cors",
             headers:{"Content-Type":"application/json;charset=utf-8"},
             body:JSON.stringify(body),
-        },config);
+        });
         var result=await response.json()
         return result;
         

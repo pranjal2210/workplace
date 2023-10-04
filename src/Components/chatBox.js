@@ -9,7 +9,7 @@ import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import UserProfile from "./userProfile";
-import { getData } from "../FetchNodeServices";
+import { getData, postData } from "../FetchNodeServices";
 import InputEmoji from "react-input-emoji";
 
 function ChatBox(props) {
@@ -95,7 +95,29 @@ function ChatBox(props) {
     const handleChange=(newMessage)=>{
       setNewMessage(newMessage);
     }
-    //console.log("MSG :",messages[0].text);
+    const handleSend=async(e)=>{
+        e.preventDefault();
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userDataJson.token}`,
+            },
+        };
+        
+        //send message to database
+        try{
+            var body={
+                chatID:props.chat._id,
+                senderID:props.currentUser,
+                text:newMessage,
+            }
+            const data = await postData('message/addMessage',body);
+            setMessages([...messages,data])
+            setNewMessage("");
+        }
+        catch(error){
+            console.log(error);
+        }
+    }
     return (
         <>
             {props.chat ?
@@ -188,7 +210,7 @@ function ChatBox(props) {
                         <div className="textBox">
                             {/* <input type="text" placeholder="Message" /> */}
                             <InputEmoji value={newMessage} onChange={handleChange}/>
-                            <i className="fa-solid fa-paper-plane"></i>
+                            <i className="fa-solid fa-paper-plane" onClick={handleSend}></i>
                         </div>
 
                         {/* <div className="chatLogo">

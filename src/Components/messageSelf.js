@@ -15,7 +15,7 @@ function messageSelf(props) {
                     <div className="message">
                         <p className="msgText">{props.message.text}</p>
                     </div>
-                    <p className="msgTime">{istTime.slice(0,4)} {istTime.slice(8)}</p>
+                    <p className="msgTime">{istTime.slice(0,5)} {istTime.slice(8)}</p>
                 </div>
             </div>
 
